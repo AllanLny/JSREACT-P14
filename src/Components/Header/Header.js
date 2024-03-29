@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import logo from '../../assets/17085055322514_Capture d’écran 2024-02-21 à 09.52.02.png'
+import logo from '../../assets/17085.webp'
 import './Header.css'
 
 export default function Header() {

@@ -14,12 +14,19 @@ const userSlice = createSlice({
         lastName: action.payload.lastName,
         email: action.payload.email,
         dateOfBirth: action.payload.dateOfBirth,
-        address: action.payload.address,
+        startDate: action.payload.startDate,
+        department: action.payload.department,
+        address: {
+          street: action.payload.street,
+          city: action.payload.city,
+          state: action.payload.state,
+          zipCode: action.payload.zipCode,
+        },
       };
       state.employees.push(newEmployee);
     },
   },
 });
 
-export const { addEmployee } = userSlice.actions;
+export const { addEmployee, setDateOfBirth, setStartDate } = userSlice.actions;
 export default userSlice.reducer;

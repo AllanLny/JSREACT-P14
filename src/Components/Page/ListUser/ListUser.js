@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../../Header/Header';
 import { useSelector } from 'react-redux';
+import './ListUser.css';
 
 export default function ListUser() {
   const employees = useSelector((state) => state.user.employees);
@@ -8,7 +9,7 @@ export default function ListUser() {
   return (
     <div className="container">
       <Header/>
-      <h1>Current Employees</h1>
+      <h1 className='h1Employe'>Current Employees</h1>
       <table className="display">
         <thead>
           <tr>
@@ -31,10 +32,10 @@ export default function ListUser() {
               <td>{employee.startDate}</td>
               <td>{employee.department}</td>
               <td>{employee.dateOfBirth}</td>
-              <td>{employee.street}</td>
-              <td>{employee.city}</td>
-              <td>{employee.state}</td>
-              <td>{employee.zipCode}</td>
+              <td>{employee.address.street}</td>
+              <td>{employee.address.city}</td>
+              <td>{employee.address.state}</td>
+              <td>{employee.address.zipCode}</td>
             </tr>
           ))}
         </tbody>
