@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import './Form.css';
-import { addEmployee } from '../../actions/userSlice';
-import Modal from "la-react-modal"
-import StateSelect from '../StateSelect/stateSelect'
-import DatePickerComponent from '../DatePicker/DatePicker';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import "./Form.css";
+import { addEmployee } from "../../actions/userSlice";
+import Modal from "la-react-modal";
+import StateSelect from "../StateSelect/stateSelect";
+import DatePickerComponent from "../DatePicker/DatePicker";
+import DepartementSelect from "../DepartementSelect/DepartementSelect";
 
 export default function Form() {
   const dispatch = useDispatch();
@@ -12,46 +13,45 @@ export default function Form() {
   const initialEmployeeState = {
     firstName: "",
     lastName: "",
-    dateOfBirth: "", 
-    startDate: "", 
+    dateOfBirth: "",
+    startDate: "",
     department: "",
     address: {
       street: "",
       city: "",
       state: "",
-      zipCode: ""
-    }
-};
+      zipCode: "",
+    },
+  };
 
-const [employee, setEmployee] = useState(initialEmployeeState);
+  const [employee, setEmployee] = useState(initialEmployeeState);
 
+  const handleInputChange = (event) => {
+    setEmployee({
+      ...employee,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-const handleInputChange = (event) => {
-  const { name, value } = event.target;
-  if (name === 'state') {
-    setEmployee(prevState => ({ 
-      ...prevState, 
-      address: { ...prevState.address, [name]: value }
-    }));
-  } else {
-    setEmployee(prevState => ({ ...prevState, [name]: value }));
-  }
-};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(addEmployee(employee));
+    setEmployee(initialEmployeeState);
+  };
 
   const handleDateChange = (id, date) => {
     if (date) {
       const newDate = new Date(date);
       newDate.setDate(newDate.getDate() + 1);
-      const dateString = newDate.toISOString().split('T')[0];
-      setEmployee(prevState => ({ ...prevState, [id]: dateString }));
+      const dateString = newDate.toISOString().split("T")[0];
+      setEmployee((prevState) => ({ ...prevState, [id]: dateString }));
     } else {
-      setEmployee(prevState => ({ ...prevState, [id]: null }));
+      setEmployee((prevState) => ({ ...prevState, [id]: null }));
     }
   };
 
   const saveEmployee = () => {
     dispatch(addEmployee(employee));
-    
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,65 +60,84 @@ const handleInputChange = (event) => {
     setIsModalOpen(false);
   };
 
-
   return (
-    <div className='Form'>
+    <div className="Form" onSubmit={handleSubmit}>
       <h2>Create Employee</h2>
       <form id="create-employee">
         <label htmlFor="firstName">First Name</label>
-        <input type="text" name="firstName" value={employee.firstName} onChange={handleInputChange} />
+        <input
+          type="text"
+          name="firstName"
+          value={employee.firstName}
+          onChange={handleInputChange}
+        />
 
         <label htmlFor="lastName">Last Name</label>
-        <input type="text" name="lastName" value={employee.lastName} onChange={handleInputChange} />
+        <input
+          type="text"
+          name="lastName"
+          value={employee.lastName}
+          onChange={handleInputChange}
+        />
 
         <label htmlFor="dateOfBirth">Date of Birth</label>
-        {/* <input type="text" id="dateOfBirth" value={employee.dateOfBirth} onChange={handleInputChange} /> */}
-        <DatePickerComponent  
-  id="dateOfBirth" 
-  onChange={handleDateChange} 
-/>
 
+        <DatePickerComponent id="dateOfBirth" onChange={handleDateChange} />
         <label htmlFor="startDate">Start Date</label>
-        <DatePickerComponent  
-  id="startDate" 
-  onChange={handleDateChange} 
-/>
+        <DatePickerComponent id="startDate" onChange={handleDateChange} />
         <fieldset className="address">
           <legend>Address</legend>
-
           <label htmlFor="street">Street</label>
-          <input name="street" type="text" value={employee.street} onChange={handleInputChange} />
-
+          <input
+            name="street"
+            type="text"
+            value={employee.street}
+            onChange={handleInputChange}
+          />
           <label htmlFor="city">City</label>
-          <input name="city" type="text" value={employee.city} onChange={handleInputChange} />
-          
-        <label htmlFor="state">State</label>
-       <StateSelect 
-  name="state" 
-  value={employee.address.state} 
-  onChange={handleInputChange} 
-/>
+          <input
+            name="city"
+            type="text"
+            value={employee.city}
+            onChange={handleInputChange}
+          />
+          <label htmlFor="state">State</label>
+          <StateSelect
+            name="state"
+            id="state"
+            value={employee.state}
+            onChange={handleInputChange}
+          />
           <label htmlFor="zipCode">Zip Code</label>
-          <input name="zipCode" type="number" value={employee.zipCode} onChange={handleInputChange} />
+          <input
+            name="zipCode"
+            type="number"
+            value={employee.zipCode}
+            onChange={handleInputChange}
+          />
         </fieldset>
-
         <label htmlFor="department">Department</label>
-        <select name="department" id="department" value={employee.department} onChange={handleInputChange}>
-  <option>Sales</option>
-  <option>Marketing</option>
-  <option>Engineering</option>
-  <option>Human Resources</option>
-  <option>Legal</option>
-</select>
-        <button type="button" onClick={() => { saveEmployee(); setIsModalOpen(true); }}>Save</button>
+        <DepartementSelect
+          name="department"
+          id="department"
+          value={employee.department}
+          onChange={handleInputChange}
+        />
+        <button
+          type="button"
+          onClick={() => {
+            saveEmployee();
+            setIsModalOpen(true);
+          }}
+        >
+          Save
+        </button>
       </form>
-
-      <Modal isOpen={isModalOpen} onClose={closeModal}> 
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
         <div>
           <h3>Employee Created!</h3>
         </div>
-       </Modal>
-
+      </Modal>
     </div>
   );
 }

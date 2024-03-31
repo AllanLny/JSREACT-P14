@@ -1,26 +1,67 @@
 table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  th,
-  td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .h1Employe {
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.h1Employe {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.EntrieSelect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.EntrieSelect select {
+  width: 60px;
+  height: 30px;
+}
+
+.filterEntries {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.BtnPageNbrEntrie {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.btnPage {
+  cursor: pointer;
+}
+
+.SearchBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.BtnNextPrevious {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

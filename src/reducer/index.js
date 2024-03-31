@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
 function employees(state = [], action) {
   switch (action.type) {
-    case 'ADD_EMPLOYEE':
+    case "ADD_EMPLOYEE":
       return [...state, action.payload];
     default:
       return state;
@@ -10,7 +10,7 @@ function employees(state = [], action) {
 }
 
 const rootReducer = combineReducers({
-  employees
+  employees,
 });
 
 export default rootReducer;
