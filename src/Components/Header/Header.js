@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import logo from "../../assets/17085.webp";
 import "./Header.css";
 
 export default function Header() {
@@ -8,7 +7,7 @@ export default function Header() {
 
   return (
     <nav className="Nav">
-      <img src={logo} alt="logo" />
+      <h1 className="H1Nav">HRnet</h1>
       <div className="Link">
         {location.pathname !== "/" && (
           <NavLink to="/" ClassName="HomeHeader">
